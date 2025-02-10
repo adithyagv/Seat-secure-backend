@@ -1,0 +1,111 @@
+/* Ensure the page takes up the full height and width */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.reg-container {
+  font-family: "Quicksand", sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex; /* Use Flexbox to divide into two halves */
+  height: 100vh; /* Full viewport height */
+  overflow-x: hidden;
+}
+.left-half-reg h1{
+  position: relative;
+  bottom: 290px;
+  right: 190px;
+  color: white;
+}
+.left-half-reg, .right-half-reg {
+  flex: 1; /* Each half takes up equal space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  padding: 20px; /* Add padding for spacing */
+}
+
+.left-half-reg {
+  background-image: url('../pages/images/reg.jpg'); 
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: -1.2vh;
+  margin-right: -1.2vh;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  
+}
+
+.right-half-reg {
+  background-color: white; /* Optional: Add a semi-transparent background */
+  color: black; /* Ensure text is visible */
+  position: relative;
+  left:9px;
+}
+
+.form-container {
+  max-width: 400px;
+  width: 100%; /* Ensure the form doesn't overflow */
+  padding: 1.5rem;
+  
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-reg {
+    background-color: rgb(255, 98, 0); /* Semi-transparent background */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Softer border */
+    border-radius: 12px; /* Rounded edges */
+    backdrop-filter: blur(10px); /* Blur effect */
+    width: 160px;
+    padding: 10px;
+    color: white; /* Text color */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    left: 120px;
+    font-family: "Quicksand", sans-serif;
+}
+
+.login-button:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.message {
+  color: green; /* Success message color */
+  text-align: center;
+}
