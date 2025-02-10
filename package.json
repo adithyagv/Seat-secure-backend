@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "seat",
   "version": "0.1.0",
   "private": true,
@@ -13,7 +12,16 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^4.2.4"
+    "web-vitals": "^4.2.4",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,17 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-=======
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.12.0",
-    "mongoose": "^8.9.5",
-    "multer": "^1.4.5-lts.1"
->>>>>>> 75139ea (Initial commit)
   }
 }
