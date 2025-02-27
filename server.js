@@ -88,7 +88,18 @@ app.post("/api/register", async (req, res) => {
     }
 });
 
-
+const eventSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    type: { type: String, required: true },
+    date: { type: String, required: true },
+    time: { type: String, required: true },
+    venue: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: String, required: true },
+    city: { type: String, required: true },
+    image: { type: String, required: true }, 
+});
+const Event = mongoose.model("events", eventSchema);
 app.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
 
@@ -121,18 +132,7 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
-const eventSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    type: { type: String, required: true },
-    date: { type: String, required: true },
-    time: { type: String, required: true },
-    venue: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: String, required: true },
-    city: { type: String, required: true },
-    image: { type: String, required: true }, 
-});
-const Event = mongoose.model("events", eventSchema);
+
 
 const storage = multer.diskStorage({
     destination: "uploads/",
@@ -144,6 +144,8 @@ const upload = multer({ storage });
 
 app.post("/api/events", async (req, res) => {
     try {
+        console.log("Received Event Data:", req.body); 
+
         const { title, type, date, time, venue, description, price, city, image } = req.body;
 
         if (!title || !type || !date || !time || !venue || !description || !price || !city || !image) {
@@ -158,6 +160,7 @@ app.post("/api/events", async (req, res) => {
         res.status(500).json({ message: "Error adding event", error: err });
     }
 });
+
     
 
 app.get("/api/events/:city", async (req, res) => {
