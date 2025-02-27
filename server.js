@@ -5,11 +5,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
-
+const axios = require("axios");
 const app = express();
 const PORT = 5000;
 app.use(bodyParser.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3001" }));
 
 mongoose.connect("mongodb+srv://adithyagv:adith%40123@cluster0.d9kiu.mongodb.net/", {useNewUrlParser: true, useUnifiedTopology: true, serverSelectionTimeoutMS: 30000,socketTimeoutMS: 45000})
 .then(() => console.log("Connected to MongoDB"))
@@ -32,7 +32,6 @@ const feedbackSchema = new mongoose.Schema({
 });
 
 const Feedback = mongoose.model("feedbacks", feedbackSchema);
-
 
 app.post("/api/feedback", async (req, res) => {
     try {
