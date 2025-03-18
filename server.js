@@ -8,6 +8,8 @@ const path = require("path");
 const axios = require("axios");
 const app = express();
 const PORT = 5000;
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
 app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3000" }));
 
@@ -52,6 +54,59 @@ app.post("/api/feedback", async (req, res) => {
 });
 
 
+dotenv.config(); 
+
+app.post("/api/forgot-password", async (req, res) => {
+    const { email } = req.body;
+    console.log("Forgot password request for:", email);
+  
+    try {
+      const user = await User.findOne({ email });
+  
+      if (!user) {
+        return res.status(404).json({ message: "User not found with this email." });
+      }
+  
+      
+      const tempPassword = Math.random().toString(36).slice(-8); 
+  
+      
+      const hashedPassword = await bcrypt.hash(tempPassword, 10);
+      user.password = hashedPassword;
+      await user.save();
+  
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+  
+      const mailOptions = {
+        from: `"SeatPal Support" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: "SeatPal - Password Reset",
+        html: `
+          <h3>Hello ${user.username},</h3>
+          <p>We’ve reset your SeatPal account password as requested.</p>
+          <p><strong>New Password:</strong> <code>${tempPassword}</code></p>
+          <p>Please use this password to log in and consider changing it once you're in.</p>
+          <p>If you didn’t request this change, please contact our support team immediately.</p>
+          <p>Best,<br/>SeatPal Team</p>
+        `,
+      };
+  
+      await transporter.sendMail(mailOptions);
+  
+      res.status(200).json({ message: "New password sent to your email." });
+    } catch (error) {
+      console.error("Error sending reset email:", error);
+      res.status(500).json({ message: "Failed to send reset email. Please try again." });
+    }
+  });
+
+  
 app.get("/api/feedback/:eventId", async (req, res) => {
     try {
         const { eventId } = req.params;
