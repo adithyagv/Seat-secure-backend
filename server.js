@@ -154,6 +154,7 @@ const eventSchema = new mongoose.Schema({
     image: { type: String, required: true }, 
 });
 const Event = mongoose.model("events", eventSchema);
+
 app.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
 
