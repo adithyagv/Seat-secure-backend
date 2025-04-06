@@ -56,7 +56,7 @@ app.post("/api/feedback", async (req, res) => {
 
 dotenv.config(); 
 
-app.post("/api/forgot-password", async (req, res) => {
+app.post("/forgot-password", async (req, res) => {
     const { email } = req.body;
     console.log("Forgot password request for:", email);
   
