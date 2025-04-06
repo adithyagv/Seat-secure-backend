@@ -11,7 +11,7 @@ const PORT = 5000;
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 app.use(bodyParser.json());
-app.use(cors({ origin: "http://localhost:3000" })); 
+app.use(cors({ origin: "https://seat-secure.vercel.app/" })); 
 
 mongoose.connect("mongodb+srv://adithyagv:adith%40123@cluster0.d9kiu.mongodb.net/" )
 .then(() => console.log("Connected to MongoDB"))
@@ -35,7 +35,7 @@ const feedbackSchema = new mongoose.Schema({
 
 const Feedback = mongoose.model("feedbacks", feedbackSchema);
 
-app.post("/api/feedback", async (req, res) => {
+app.post("/feedback", async (req, res) => {
     try {
         const { eventId, rating, comment } = req.body;
 
@@ -107,7 +107,7 @@ app.post("/forgot-password", async (req, res) => {
   });
 
   
-app.get("/api/feedback/:eventId", async (req, res) => {
+app.get("/feedback/:eventId", async (req, res) => {
     try {
         const { eventId } = req.params;
         const feedbacks = await Feedback.find({ eventId }).sort({ createdAt: -1 });
@@ -119,7 +119,7 @@ app.get("/api/feedback/:eventId", async (req, res) => {
     }
 });
 
-app.post("/api/register", async (req, res) => {
+app.post("/register", async (req, res) => {
     try {
         const { username, email, password, city } = req.body;
         if (!username || !email || !password || !city) {
@@ -155,7 +155,7 @@ const eventSchema = new mongoose.Schema({
 });
 const Event = mongoose.model("events", eventSchema);
 
-app.post("/api/login", async (req, res) => {
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -197,7 +197,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-app.post("/api/events", async (req, res) => {
+app.post("/events", async (req, res) => {
     try {
         console.log("Received Event Data:", req.body); 
 
@@ -218,7 +218,7 @@ app.post("/api/events", async (req, res) => {
 
     
 
-app.get("/api/events/:city", async (req, res) => {
+app.get("/events/:city", async (req, res) => {
     const { city } = req.params;
     try {
       const events = await Event.find({
@@ -232,7 +232,7 @@ app.get("/api/events/:city", async (req, res) => {
     }
   });
 
-app.get("/api/events", async (req, res) => {
+app.get("/events", async (req, res) => {
     try {
         const events = await Event.find();
         res.status(200).json({ events });
@@ -242,7 +242,7 @@ app.get("/api/events", async (req, res) => {
     }
 });
 
-app.get("/api/event/:id", async (req, res) => {
+app.get("/event/:id", async (req, res) => {
     const { id } = req.params;
     try {
       const event = await Event.findById(id);
@@ -257,7 +257,7 @@ app.get("/api/event/:id", async (req, res) => {
   });
 
 
-app.put("/api/events/:id", upload.single("image"), async (req, res) => {
+app.put("/events/:id", upload.single("image"), async (req, res) => {
     try {
         const { id } = req.params;
         const updatedData = req.body;
@@ -276,7 +276,7 @@ app.put("/api/events/:id", upload.single("image"), async (req, res) => {
 });
 
 
-app.delete("/api/events/:id", async (req, res) => {
+app.delete("/events/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const deletedEvent = await Event.findByIdAndDelete(id);
