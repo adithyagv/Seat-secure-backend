@@ -7,11 +7,11 @@ const multer = require("multer");
 const path = require("path");
 const axios = require("axios");
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 app.use(bodyParser.json());
-app.use(cors({ origin: "https://seat-secure.vercel.app/" }));
+app.use(cors({ origin: "http://localhost:3000" })); 
 
 mongoose.connect("mongodb+srv://adithyagv:adith%40123@cluster0.d9kiu.mongodb.net/" )
 .then(() => console.log("Connected to MongoDB"))
