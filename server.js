@@ -11,7 +11,7 @@ const PORT = 5000;
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 app.use(bodyParser.json());
-app.use(cors({ origin: "http://localhost:3000" })); 
+app.use(cors({ origin: "https://seat-secure.vercel.app" })); 
 
 mongoose.connect("mongodb+srv://adithyagv:adith%40123@cluster0.d9kiu.mongodb.net/" )
 .then(() => console.log("Connected to MongoDB"))
