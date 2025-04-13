@@ -121,8 +121,8 @@ app.get("/feedback/:eventId", async (req, res) => {
 
 app.post("/register", async (req, res) => {
     try {
-        const { username, email, password, city } = req.body;
-        if (!username || !email || !password || !city) {
+        const { username, email, password } = req.body;
+        if (!username || !email || !password) {
             return res.status(400).json({ message: "All fields are required!" });
         }
 
@@ -280,7 +280,7 @@ app.delete("/events/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const deletedEvent = await Event.findByIdAndDelete(id);
-        if (!deletedEvent) {
+        if ( !deletedEvent) {
             return res.status(404).json({ message: "Event not found" });
         }
         res.status(200).json({ message: "Event deleted successfully" });
